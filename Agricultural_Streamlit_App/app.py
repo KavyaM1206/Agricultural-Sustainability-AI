@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -118,7 +119,9 @@ div[data-testid="metric-container"] {
 # ================================================================
 @st.cache_data
 def load_data():
-    df = pd.read_csv("crop_production.csv")
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    csv_path = os.path.join(base_dir, "crop_production.csv")
+    df = pd.read_csv(csv_path)
 
     # Rename columns (preserved from original)
     df.rename(columns={
